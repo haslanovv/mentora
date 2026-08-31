@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import AdminListingsManager from '@/components/AdminListingsManager';
 
 export default function AdminPanel() {
   const [session, setSession] = useState<any>(null);
@@ -192,6 +193,8 @@ export default function AdminPanel() {
       </div>
     );
   }
+
+  return <AdminListingsManager onLogout={handleLogout} />;
 
   const filteredListings = listings.filter(item => 
     item.teacher_name.toLowerCase().includes(searchTerm.toLowerCase()) ||

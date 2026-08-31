@@ -1,0 +1,124 @@
+warning: in the working copy of 'app/page.tsx', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/app/page.tsx b/app/page.tsx[m
+[1mindex 9b05b00..b35c248 100644[m
+[1m--- a/app/page.tsx[m
+[1m+++ b/app/page.tsx[m
+[36m@@ -3,6 +3,15 @@[m
+ import { useState, useEffect } from 'react';[m
+ import { supabase } from '@/lib/supabase';[m
+ import ListingCard from "@/components/ListingCard";[m
+[32m+[m[32mimport VipCarousel from "@/components/VipCarousel";[m
+[32m+[m[32mimport { motion } from 'framer-motion';[m
+[32m+[m
+[32m+[m[32mconst subjects = [[m
+[32m+[m[32m  'Riyaziyyat', 'Azərbaycan dili', 'İngilis dili', 'Rus dili', 'Alman dili', 'Fransız dili',[m
+[32m+[m[32m  'Ədəbiyyat', 'Fizika', 'Kimya', 'Biologiya', 'Tarix', 'Coğrafiya', 'İnformatika',[m
+[32m+[m[32m  'Məntiq', 'İbtidai sinif', 'Məktəbəqədər hazırlıq', 'Musiqi', 'Rəsm', 'Şahmat',[m
+[32m+[m[32m  'SAT', 'IELTS', 'TOEFL', 'DİM hazırlığı', 'Qabiliyyət imtahanı', 'Digər'[m
+[32m+[m[32m];[m
+ [m
+ export default function Home() {[m
+   const [listings, setListings] = useState<any[]>([]);[m
+[36m@@ -11,13 +20,6 @@[m [mexport default function Home() {[m
+   const [searchTerm, setSearchTerm] = useState('');[m
+   const [selectedSubject, setSelectedSubject] = useState('Bütün fənlər');[m
+   const [selectedFormat, setSelectedFormat] = useState('Bütün formatlar');[m
+[31m-  const [darkMode, setDarkMode] = useState(false);[m
+[31m-[m
+[31m-  const toggleDarkMode = () => {[m
+[31m-    setDarkMode(!darkMode);[m
+[31m-    if (!darkMode) document.documentElement.classList.add('dark');[m
+[31m-    else document.documentElement.classList.remove('dark');[m
+[31m-  };[m
+ [m
+   useEffect(() => {[m
+     async function fetchListings() {[m
+[36m@@ -25,6 +27,8 @@[m [mexport default function Home() {[m
+         .from('listings')[m
+         .select('*')[m
+         .eq('is_active', true)[m
+[32m+[m[32m        .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)[m
+[32m+[m[32m        .or(`hidden_until.is.null,hidden_until.lte.${new Date().toISOString()}`)[m
+         .order('is_vip', { ascending: false })[m
+         .order('created_at', { ascending: false });[m
+       setListings(data || []);[m
+[36m@@ -45,83 +49,80 @@[m [mexport default function Home() {[m
+   const normalListings = filteredListings.filter(item => !item.is_vip);[m
+ [m
+   return ([m
+[31m-    <div className={`min-h-screen ${darkMode ? 'bg-[#0a0a0a] text-white' : 'bg-[#fafafa] text-gray-900'}`}>[m
+[31m-      [m
+[31m-      {/* Tünd Rejim Keçidi */}[m
+[31m-      <div className="max-w-6xl mx-auto px-4 pt-6 flex justify-end">[m
+[31m-        <button [m
+[31m-          onClick={toggleDarkMode}[m
+[31m-          className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 transition-colors"[m
+[31m-        >[m
+[31m-          {darkMode ? 'Aydınlıq' : 'Tünd Rejim'}[m
+[31m-        </button>[m
+[31m-      </div>[m
+[32m+[m[32m    <div className="page-shell overflow-hidden">[m
+[32m+[m[32m      <section className="relative mx-auto max-w-7xl px-4 pb-10 pt-14 sm:px-6 sm:pb-16 sm:pt-20">[m
+[32m+[m[32m        <div className="soft-grid pointer-events-none absolute inset-x-0 top-0 h-[420px] opacity-50" />[m
+[32m+[m[32m        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} className="relative mx-auto max-w-3xl text-center">[m
+[32m+[m[32m          <span className="premium-ring inline-flex rounded-full bg-[var(--surface-solid)] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">Doğru seçim, güclü nəticə</span>[m
+[32m+[m[32m          <h1 className="mt-7 text-4xl font-bold leading-[1.04] tracking-[-0.065em] text-[var(--ink)] sm:text-6xl">Sizə uyğun müəllimi <span className="text-[var(--accent)]">tapın.</span></h1>[m
+[32m+[m[32m          <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-[var(--ink-muted)] sm:text-lg">Fənn, format və qiymət seçiminizə uyğun peşəkar müəllimlərlə rahatlıqla əlaqə saxlayın.</p>[m
+[32m+[m[32m        </motion.div>[m
+ [m
+[31m-      <div className="max-w-6xl mx-auto px-4 py-8">[m
+[32m+[m[32m        <div id="elanlar" className="relative mx-auto mt-11 max-w-6xl">[m
+         [m
+         {/* Axtarış və Filtr (Minimalist) */}[m
+[31m-        <div className="mb-12 flex flex-col md:flex-row gap-3">[m
+[32m+[m[32m        <div className="glass-panel mb-12 flex flex-col gap-3 rounded-[24px] p-3 md:flex-row">[m
+           <input [m
+             type="text"[m
+             value={searchTerm}[m
+             onChange={(e) => setSearchTerm(e.target.value)}[m
+             placeholder="Axtarış..."[m
+[31m-            className="w-full md:flex-1 bg-white dark:bg-[#151515] border border-gray-100 dark:border-white/5 rounded-xl px-4 py-3 outline-none focus:border-[#d4af37]/50 text-sm shadow-sm transition-colors"[m
+[32m+[m[32m            className="w-full rounded-xl border border-transparent bg-[var(--surface-solid)] px-4 py-3.5 text-sm text-[var(--ink)] outline-none transition placeholder:text-[var(--ink-muted)] focus:border-[var(--accent)] md:flex-1"[m
+           />[m
+[31m-          <div className="flex gap-3">[m
+[32m+[m[32m          <div className="flex flex-col gap-3 sm:flex-row">[m
+             <select [m
+               value={selectedSubject}[m
+               onChange={(e) => setSelectedSubject(e.target.value)}[m
+[31m-              className="bg-white dark:bg-[#151515] border border-gray-100 dark:border-white/5 rounded-xl px-4 py-3 outline-none text-sm shadow-sm"[m
+[32m+[m[32m              className="rounded-xl border border-transparent bg-[var(--surface-solid)] px-4 py-3.5 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--accent)]"[m
+             >[m
+               <option>Bütün fənlər</option>[m
+[31m-              <option>Riyaziyyat</option>[m
+[31m-              <option>İngilis dili</option>[m
+[32m+[m[32m              {subjects.map((subject) => <option key={subject}>{subject}</option>)}[m
+             </select>[m
+             <select [m
+               value={selectedFormat}[m
+               onChange={(e) => setSelectedFormat(e.target.value)}[m
+[31m-              className="bg-white dark:bg-[#151515] border border-gray-100 dark:border-white/5 rounded-xl px-4 py-3 outline-none text-sm shadow-sm"[m
+[32m+[m[32m              className="rounded-xl border border-transparent bg-[var(--surface-solid)] px-4 py-3.5 text-sm text-[var(--ink)] outline-none transition focus:border-[var(--accent)]"[m
+             >[m
+               <option>Bütün formatlar</option>[m
+               <option value="online">Onlayn</option>[m
+               <option value="eyani">Əyani</option>[m
+[32m+[m[32m              <option value="her_ikisi">Hər ikisi</option>[m
+             </select>[m
+           </div>[m
+         </div>[m
+ [m
+         {loading ? ([m
+[31m-          <p className="text-center text-gray-400 text-sm">Yüklənir...</p>[m
+[32m+[m[32m          <p className="py-10 text-center text-sm text-[var(--ink-muted)]">Elanlar yüklənir...</p>[m
+         ) : filteredListings.length === 0 ? ([m
+[31m-          <p className="text-center text-gray-400 text-sm">Elan tapılmadı.</p>[m
+[32m+[m[32m          <p className="rounded-3xl border border-dashed border-[var(--line)] py-14 text-center text-sm text-[var(--ink-muted)]">Bu seçimlərə uyğun elan tapılmadı.</p>[m
+         ) : ([m
+           <div className="space-y-12">[m
+             {vipListings.length > 0 && ([m
+               <div>[m
+[31m-                <h2 className="text-sm font-semibold mb-4 text-[#d4af37] uppercase tracking-wider">VIP Elanlar</h2>[m
+[31m-                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">[m
+[31m-                  {vipListings.map((item) => ([m
+[31m-                    <div key={item.id} className="min-w-[280px] w-[280px] flex-shrink-0">[m
+[31m-                      <ListingCard listing={i

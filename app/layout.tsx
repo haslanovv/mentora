@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="az">
-      <body className="bg-gray-50 min-h-screen flex flex-col font-sans">
+      <body className="min-h-screen font-sans antialiased">
         {/* Yaratdığımız yuxarı menyu burada görünəcək */}
         <Header />
         

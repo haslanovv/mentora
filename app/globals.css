@@ -1,1 +1,45 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --page: #f8f7f4;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-solid: #ffffff;
+  --surface-muted: #f1efea;
+  --ink: #1b1b1a;
+  --ink-muted: #6e6a62;
+  --line: rgba(50, 47, 42, 0.11);
+  --accent: #ae7c3b;
+  --accent-deep: #835725;
+  --accent-soft: #f5eadb;
+  --shadow: 0 20px 60px rgba(45, 37, 27, 0.09);
+}
+
+.dark {
+  --page: #131311;
+  --surface: rgba(31, 30, 27, 0.76);
+  --surface-solid: #201f1c;
+  --surface-muted: #292721;
+  --ink: #f5f1e9;
+  --ink-muted: #b7b0a5;
+  --line: rgba(244, 238, 225, 0.12);
+  --accent: #e0b270;
+  --accent-deep: #f0c482;
+  --accent-soft: rgba(224, 178, 112, 0.13);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--page); color: var(--ink); font-family: Arial, Helvetica, sans-serif; transition: background-color 240ms ease, color 240ms ease; }
+::selection { background: var(--accent); color: white; }
+.page-shell { min-height: 100vh; background: radial-gradient(circle at 8% 8%, rgba(222, 180, 116, 0.17), transparent 27rem), radial-gradient(circle at 92% 20%, rgba(174, 124, 59, 0.1), transparent 25rem), var(--page); }
+.dark .page-shell { background: radial-gradient(circle at 8% 8%, rgba(224, 178, 112, 0.12), transparent 28rem), radial-gradient(circle at 92% 20%, rgba(174, 124, 59, 0.1), transparent 26rem), var(--page); }
+.glass-panel { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); backdrop-filter: blur(18px); }
+.soft-grid { background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom, black, transparent 82%); }
+.premium-ring { box-shadow: 0 0 0 5px var(--accent-soft); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.float-slow { animation: float 6s ease-in-out infinite; }
+.input { width: 100%; border: 1px solid rgba(32, 32, 30, 0.14); border-radius: 0.75rem; padding: 0.75rem 0.9rem; color: #20201e; outline: none; transition: border-color 160ms ease, box-shadow 160ms ease; }
+.input:focus { border-color: #b98540; box-shadow: 0 0 0 3px rgba(185, 133, 64, 0.14); }
