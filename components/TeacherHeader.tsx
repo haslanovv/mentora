@@ -101,22 +101,7 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* DESKTOP MENYU */}
-          <nav className="hidden items-center gap-7 text-sm font-medium text-[var(--ink-muted)] md:flex">
-            <a
-              href="#elanlar"
-              className="transition-colors hover:text-[var(--ink)]"
-            >
-              Müəllimlər
-            </a>
-
-            <a
-              href="#nece-isleyir"
-              className="transition-colors hover:text-[var(--ink)]"
-            >
-              Necə işləyir
-            </a>
-          </nav>
+        
 
           {/* SAĞ TƏRƏF */}
           <div className="flex items-center gap-2">
