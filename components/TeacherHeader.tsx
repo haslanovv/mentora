@@ -106,22 +106,7 @@ export default function Header() {
           {/* SAĞ TƏRƏF */}
           <div className="flex items-center gap-2">
 
-            {/* ELAN YERLƏŞDİR */}
-            <button
-              onClick={openListingModal}
-              className="hidden rounded-full bg-[var(--ink)] px-4 py-2.5 text-xs font-semibold text-[var(--page)] transition-all hover:-translate-y-0.5 hover:shadow-lg sm:px-5 md:block"
-            >
-              Elan yerləşdir
-            </button>
-
-            {/* DARK MODE */}
-            <button
-              onClick={toggleTheme}
-              className="grid h-10 w-10 place-items-center rounded-full border border-[var(--line)] text-[var(--ink)] transition-all hover:-translate-y-0.5 hover:bg-[var(--surface-muted)]"
-              aria-label="Rəng rejimini dəyiş"
-            >
-              {isDark ? "☀" : "◐"}
-            </button>
+          
 
             {/* HAMBURGER */}
             <button
