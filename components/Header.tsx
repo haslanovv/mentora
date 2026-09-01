@@ -13,7 +13,7 @@ export default function Header() {
         
         {/* Sol tərəf: Loqo */}
         <Link href="/" className="text-2xl font-bold text-blue-600 tracking-tight">
-          MüəllimTap
+          Mentora-az
         </Link>
 
         {/* Orta hissə: Search bar (Axtarış) */}
