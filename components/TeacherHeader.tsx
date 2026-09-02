@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -61,7 +60,7 @@ export default function Header() {
     e.preventDefault();
 
     const message = [
-      "Salam, MüəllimTap-da elan yerləşdirmək istəyirəm.",
+      "Salam, Mentora-az-da elan yerləşdirmək istəyirəm.",
       "",
       `Ad və soyad: ${form.name}`,
       `Əlaqə nömrəsi: ${form.phone}`,
@@ -89,24 +88,19 @@ export default function Header() {
           <Link
             href="/"
             className="group flex items-center gap-2.5"
-            aria-label="MüəllimTap ana səhifə"
+            aria-label="Mentora-az ana səhifə"
           >
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--ink)] text-sm font-black text-[var(--page)] transition-transform duration-300 group-hover:-rotate-6">
               M
             </span>
 
             <span className="text-lg font-bold tracking-[-0.04em] text-[var(--ink)]">
-              Müəllim
-              <span className="text-[var(--accent)]">Tap</span>
+              Mentora-az
             </span>
           </Link>
 
-        
-
           {/* SAĞ TƏRƏF */}
           <div className="flex items-center gap-2">
-
-          
 
             {/* HAMBURGER */}
             <button
@@ -155,7 +149,7 @@ export default function Header() {
                 <div className="mb-10 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-                      MüəllimTap
+                      Mentora-az
                     </p>
 
                     <h2 className="mt-1 text-xl font-bold tracking-[-0.04em]">
@@ -212,7 +206,7 @@ export default function Header() {
                     <div>
                       <p className="font-semibold">Necə işləyir</p>
                       <p className="mt-1 text-xs text-[var(--ink-muted)]">
-                        MüəllimTap haqqında məlumat
+                        Mentora-az haqqında məlumat
                       </p>
                     </div>
 
@@ -258,7 +252,7 @@ export default function Header() {
                 <div className="mt-auto pt-10">
                   <div className="border-t border-[var(--line)] pt-6">
                     <p className="text-xs leading-5 text-[var(--ink-muted)]">
-                      MüəllimTap — sizə uyğun müəllimi daha rahat tapmağın
+                      Mentora-az — sizə uyğun müəllimi daha rahat tapmağın
                       sadə yolu.
                     </p>
                   </div>
