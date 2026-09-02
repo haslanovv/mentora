@@ -41,7 +41,7 @@ className="group block h-full"
           <img
             src={image}
             alt={`${listing.teacher_name || "Müəllim"} müəllim elanı`}
-            className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+            className="h-full w-full object-contain transition duration-700 group-hover:scale-[1.02]"
           />
         </div>
       ) : (
