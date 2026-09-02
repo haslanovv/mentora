@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/TeacherHeader";
 
 export const metadata: Metadata = {
-  title: "MüəllimTap - Tələbə Müəllim Saytı",
+  title: "Mentora-az - Tələbə Müəllim Saytı",
   description: "Özünə uyğun müəllimi tap",
 };
 
