@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const WHATSAPP_USERNAME = "muallimtap";
+const WHATSAPP_USERNAME = "mentoraaz";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -83,7 +83,6 @@ export default function Header() {
       {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[color:var(--page)]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6">
-
           {/* LOGO */}
           <Link
             href="/"
@@ -101,7 +100,6 @@ export default function Header() {
 
           {/* SAĞ TƏRƏF */}
           <div className="flex items-center gap-2">
-
             {/* HAMBURGER */}
             <button
               onClick={() => setIsMenuOpen(true)}
@@ -131,7 +129,6 @@ export default function Header() {
       {isMenuOpen &&
         createPortal(
           <div className="fixed inset-0 z-[90]">
-
             {/* ARXA FON */}
             <button
               aria-label="Menyunu bağla"
@@ -144,7 +141,6 @@ export default function Header() {
               className="absolute right-0 top-0 h-full w-full max-w-[390px] overflow-y-auto border-l border-[var(--line)] bg-[var(--surface-solid)] text-[var(--ink)] shadow-2xl animate-in slide-in-from-right duration-300"
             >
               <div className="flex min-h-full flex-col p-6">
-
                 {/* PANEL HEADER */}
                 <div className="mb-10 flex items-center justify-between">
                   <div>
@@ -180,7 +176,6 @@ export default function Header() {
 
                 {/* NAVİQASİYA */}
                 <div className="space-y-2">
-
                   <a
                     href="#elanlar"
                     onClick={() => setIsMenuOpen(false)}
@@ -214,13 +209,11 @@ export default function Header() {
                       →
                     </span>
                   </a>
-
                 </div>
 
                 {/* GÖRÜNÜŞ */}
                 <div className="mt-8 rounded-2xl border border-[var(--line)] bg-[var(--surface-muted)] p-4">
                   <div className="flex items-center justify-between gap-4">
-
                     <div>
                       <p className="font-semibold">Görünüş</p>
                       <p className="mt-1 text-xs text-[var(--ink-muted)]">
@@ -234,7 +227,6 @@ export default function Header() {
                     >
                       {isDark ? "☀ Ağ rejim" : "◐ Qaranlıq"}
                     </button>
-
                   </div>
                 </div>
 
@@ -257,7 +249,6 @@ export default function Header() {
                     </p>
                   </div>
                 </div>
-
               </div>
             </aside>
           </div>,
@@ -275,7 +266,6 @@ export default function Header() {
               className="relative my-auto w-full max-w-md rounded-[28px] border border-[var(--line)] bg-[var(--surface-solid)] p-7 text-[var(--ink)] shadow-2xl animate-in fade-in zoom-in duration-200"
               onClick={(event) => event.stopPropagation()}
             >
-
               {/* BAĞLA */}
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -311,7 +301,6 @@ export default function Header() {
               </p>
 
               <form onSubmit={handleWhatsApp} className="space-y-3">
-
                 <input
                   required
                   value={form.name}
@@ -340,12 +329,9 @@ export default function Header() {
                 />
 
                 <div className="grid grid-cols-2 gap-3">
-
                   <select
                     value={form.format}
-                    onChange={(e) =>
-                      updateForm("format", e.target.value)
-                    }
+                    onChange={(e) => updateForm("format", e.target.value)}
                     className="rounded-xl border border-[var(--line)] bg-[var(--surface-solid)] px-4 py-3 text-sm outline-none"
                   >
                     <option value="">Format</option>
@@ -356,9 +342,7 @@ export default function Header() {
 
                   <select
                     value={form.language}
-                    onChange={(e) =>
-                      updateForm("language", e.target.value)
-                    }
+                    onChange={(e) => updateForm("language", e.target.value)}
                     className="rounded-xl border border-[var(--line)] bg-[var(--surface-solid)] px-4 py-3 text-sm outline-none"
                   >
                     <option value="">Tədris dili</option>
@@ -366,16 +350,12 @@ export default function Header() {
                     <option>English</option>
                     <option>Русский</option>
                   </select>
-
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-
                   <input
                     value={form.region}
-                    onChange={(e) =>
-                      updateForm("region", e.target.value)
-                    }
+                    onChange={(e) => updateForm("region", e.target.value)}
                     type="text"
                     placeholder="Region / şəhər"
                     className="w-full rounded-xl border border-[var(--line)] bg-transparent px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)]"
@@ -383,14 +363,11 @@ export default function Header() {
 
                   <input
                     value={form.price}
-                    onChange={(e) =>
-                      updateForm("price", e.target.value)
-                    }
+                    onChange={(e) => updateForm("price", e.target.value)}
                     type="text"
                     placeholder="Qiymət (AZN)"
                     className="w-full rounded-xl border border-[var(--line)] bg-transparent px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)]"
                   />
-
                 </div>
 
                 <button
@@ -399,7 +376,6 @@ export default function Header() {
                 >
                   WhatsApp-a göndər
                 </button>
-
               </form>
             </div>
           </div>,
