@@ -70,7 +70,7 @@ className="group block h-full"
             </div>
 
             <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-              MüəllimTap
+              Mentora-az
             </span>
           </div>
         </div>
