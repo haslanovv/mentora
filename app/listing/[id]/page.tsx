@@ -17,7 +17,19 @@ export default function ListingDetails() {
     async function fetchDetail() {
       const { data, error } = await supabase.from("listings").select("*").eq("id", id).or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`).or(`hidden_until.is.null,hidden_until.lte.${new Date().toISOString()}`).single();
       if (error || !data) { router.replace("/"); return; }
-      setListing(data);
+
+      // Elanın səhifəsi açıldıqda baxış sayını 1 artırırıq.
+      // Əvvəlki say serverdən gəlmədiyi halda 0-dan başlayırıq.
+      const currentViews = Number(data.views_count) || 0;
+      const { data: updatedListing, error: viewError } = await supabase
+        .from("listings")
+        .update({ views_count: currentViews + 1 })
+        .eq("id", id)
+        .select("*")
+        .single();
+
+      setListing(viewError || !updatedListing ? { ...data, views_count: currentViews + 1 } : updatedListing);
+
       const { data: related } = await supabase.from("listings").select("*").eq("subject", data.subject).neq("id", data.id).eq("is_active", true).or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`).or(`hidden_until.is.null,hidden_until.lte.${new Date().toISOString()}`).order("is_vip", { ascending: false }).order("created_at", { ascending: false }).limit(4);
       setSuggestions(related || []);
       setLoading(false);
@@ -41,7 +53,7 @@ export default function ListingDetails() {
             <p className="mt-4 max-w-md text-base leading-7 text-[var(--ink-muted)]">{listing.description || "Dərs planı və uyğun vaxtları öyrənmək üçün müəllimlə birbaşa əlaqə saxlayın."}</p>
           </div>
           <div className="rounded-3xl border border-[var(--line)] bg-[var(--surface-solid)] p-6">
-            <dl className="space-y-5 text-sm"><div><dt className="mb-1 text-xs font-bold uppercase tracking-[0.13em] text-[var(--ink-muted)]">Məkan</dt><dd className="font-semibold text-[var(--ink)]">{listing.region || "Bakı"}</dd></div><div><dt className="mb-1 text-xs font-bold uppercase tracking-[0.13em] text-[var(--ink-muted)]">Dərs formatı</dt><dd className="font-semibold text-[var(--ink)]">{format}</dd></div><div><dt className="mb-1 text-xs font-bold uppercase tracking-[0.13em] text-[var(--ink-muted)]">Aylıq qiymət</dt><dd className="font-semibold text-[var(--ink)]">{listing.price ? `${listing.price} AZN` : "Razılaşma ilə"}</dd></div></dl>
+            <dl className="space-y-5 text-sm"><div><dt className="mb-1 text-xs font-bold uppercase tracking-[0.13em] text-[var(--ink-muted)]">Məkan</dt><dd className="font-semibold text-[var(--ink)]">{listing.region || "Bakı"}</dd></div><div><dt className="mb-1 text-xs font-bold uppercase tracking-[0.13em] text-[var(--ink-muted)]">Dərs formatı</dt><dd className="font-semibold text-[var(--ink)]">{format}</dd></div><div><dt className="mb-1 text-xs font-bold uppercase tracking-[0.13em] text-[var(--ink-muted)]">Aylıq qiymət</dt><dd className="font-semibold text-[var(--ink)]">{listing.price ? `${listing.price} AZN` : "Razılaşma ilə"}</dd></div><div><dt className="mb-1 text-xs font-bold uppercase tracking-[0.13em] text-[var(--ink-muted)]">Baxış sayı</dt><dd className="font-semibold text-[var(--ink)]">{listing.views_count || 0}</dd></div></dl>
             <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 block rounded-xl bg-[var(--ink)] px-4 py-3.5 text-center text-sm font-bold text-[var(--page)] transition hover:-translate-y-0.5">WhatsApp ilə yaz</a>
           </div>
         </div>
